@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>শেয়ার ক্যাম্পেইন ফর্ম</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: black; /* ব্যাকগ্রাউন্ড কালো */
+    font-family: sans-serif;
+    color: white;
+    height: 100vh;
+  }
+
+  .form-container {
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 95%;
+    background: transparent;
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid white;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: transparent;
+    color: white;
+    height: 50px;
+  }
+
+  .form-group input::placeholder {
+    color: white;
+    background-color: transparent;
+    padding: 0 5px;
+  }
+
+  .form-group label {
+    position: absolute;
+    left: 12px;
+    top: 17px;
+    padding: 0 5px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    background: transparent;
+  }
+
+  .form-group input:focus + label,
+  .form-group input:not(:placeholder-shown) + label,
+  .form-group select:focus + label,
+  .form-group select:valid + label {
+    top: -17px;
+    left: 8px;
+    font-size: 12px;
+    color: white;
+  }
+
+  .form-group select {
+    background-color: transparent;
+    color: white;
+  }
+
+  .form-group select option {
+    color: black;
+    background-color: white;
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid white;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  #copyBtn, #copyAdminEmailBtn {
+    display: none; /* শুরুতে দেখাবে না */
+  }
+
+  @media (max-width: 768px) {
+    .form-container {
+      margin: 15px 10px;
+      padding: 15px;
+      width: 100%;
+    }
+
+    .form-group input,
+    .form-group select,
+    button {
+      width: 100%;
+      font-size: 14px;
+      height: 0.5in;
+      padding: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>শেয়ার ক্যাম্পেইন ফর্ম</h2>
+
+  <form id="campaignForm">
+
+    <div class="form-group">
+      <input type="text" id="fullname" name="fullname" placeholder=" " required>
+      <label for="fullname">পুরো নাম</label>
+    </div>
+
+    <div class="form-group">
+      <input type="email" id="email" name="email" placeholder=" " required>
+      <label for="email">ইমেইল</label>
+    </div>
+
+    <div class="form-group">
+      <select id="platform" name="platform" required>
+        <option value="" disabled selected hidden></option>
+        <option value="Facebook">Facebook</option>
+        <option value="YouTube">YouTube</option>
+      </select>
+      <label for="platform">আপনি কোন প্লাটফর্মে শেয়ার করেছেন?</label>
+    </div>
+
+    <div class="form-group">
+      <input type="tel" id="mobile" name="mobile" placeholder=" " pattern="^\d{11}$" required>
+      <label for="mobile">মোবাইল নম্বর (১১ ডিজিট)</label>
+    </div>
+
+    <div class="form-group">
+      <select id="payment" name="payment" required>
+        <option value="" disabled selected hidden></option>
+        <option value="bkash">বিকাশ</option>
+        <option value="nagad">নগদ</option>
+        <option value="rocket">রকেট</option>
+        <option value="upay">উপায়</option>
+      </select>
+      <label for="payment">মোবাইল পেমেন্ট পদ্ধতি</label>
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="uniqueId" name="uniqueId" placeholder=" " pattern="[0-9]{12}" required>
+      <label for="uniqueId">ইউনিক আইডি (১২ সংখ্যার)</label>
+    </div>
+
+    <button type="submit">তথ্য সেভ করুন</button>
+  </form>
+
+  <button id="copyBtn">তথ্য কপি করুন এবং পাঠান mdsolayman7814@gmail.com</button>
+  <button id="copyAdminEmailBtn">এডমিন ইমেইল কপি করুন</button>
+</div>
+
+<script>
+let submittedData = []; // ডেটা সংরক্ষণের অ্যারে
+
+document.getElementById('campaignForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const fullname = document.getElementById('fullname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const mobile = document.getElementById('mobile').value.trim();
+  const platform = document.getElementById('platform').value;
+  const payment = document.getElementById('payment').value;
+  const uniqueId = document.getElementById('uniqueId').value.trim();
+
+  // নাম চেক
+  if (fullname === "") {
+    alert("পুরো নাম প্রদান করুন!");
+    return;
+  }
+
+  // ইমেইল চেক
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  if (!emailPattern.test(email)) {
+    alert("একটি সঠিক ইমেইল দিন!");
+    return;
+  }
+
+  // মোবাইল চেক
+  const mobilePattern = /^[0-9]{11}$/;
+  if (!mobilePattern.test(mobile)) {
+    alert("মোবাইল নম্বর ১১ সংখ্যার হতে হবে!");
+    return;
+  }
+
+  // ইউনিক আইডি চেক
+  const uniqueIdPattern = /^[0-9]{12}$/;
+  if (!uniqueIdPattern.test(uniqueId)) {
+    alert("ইউনিক আইডি ১২ সংখ্যার হতে হবে!");
+    return;
+  }
+
+  // ডেটা সেভ
+  const formData = {
+    fullname: fullname,
+    email: email,
+    mobile: mobile,
+    platform: platform,
+    payment: payment,
+    uniqueId: uniqueId
+  };
+
+  submittedData.push(formData);
+  console.log("Submitted Data:", submittedData);
+
+  // Copy বাটন দেখাও
+  document.getElementById('copyBtn').style.display = 'block';
+  document.getElementById('copyAdminEmailBtn').style.display = 'block'; // এডমিন ইমেইল কপি বাটন দেখাও
+
+  // Alert দিয়ে নতুন মেসেজ দেখাও
+  alert('✅ আপনার তথ্য সেভ হয়েছে। এখন "তথ্য কপি করুন" বাটনে ক্লিক করুন ও অ্যাডমিনকে পাঠান এবং এই তথ্য mdsolayman7814@gmail.com - এ পাঠান।');
+
+  // ফর্ম রিসেট
+  document.getElementById('campaignForm').reset();
+});
+
+// Copy বাটনে ক্লিক করলে ডেটা কপি হবে এবং পাঠানো হবে
+document.getElementById('copyBtn').addEventListener('click', function() {
+  if (submittedData.length === 0) {
+    alert("প্রথমে তথ্য প্রদান করুন!");
+    return;
+  }
+
+  const lastData = submittedData[submittedData.length - 1]; // শেষ তথ্য
+
+  const textToCopy = `Name: ${lastData.fullname}
+Email: ${lastData.email}
+Mobile: ${lastData.mobile}
+Platform: ${lastData.platform}
+Payment: ${lastData.payment}
+Unique ID: ${lastData.uniqueId}`;
+
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    alert("✅ তথ্য কপি হয়েছে! এখন অ্যাডমিনকে পাঠান।");
+    window.location.href = "mailto:mdsolayman7814@gmail.com?subject=Campaign%20Form%20Submission&body=" + encodeURIComponent(textToCopy);
+  }).catch(err => {
+    alert("❌ কপি করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
+  });
+});
+
+// Admin Email Copy বাটনে ক্লিক করলে এডমিন ইমেইল কপি হবে
+document.getElementById('copyAdminEmailBtn').addEventListener('click', function() {
+  const adminEmail = "mdsolayman7814@gmail.com";
+  
+  navigator.clipboard.writeText(adminEmail).then(() => {
+    alert("✅ এডমিন ইমেইল কপি হয়েছে!");
+  }).catch(err => {
+    alert("❌ কপি করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
+  });
+});
+</script>
+
+</body>
+</html>
