@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডিলার অ্যাপয়েন্টমেন্ট ফর্ম</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            font-family: sans-serif;
+            color: white;
+            background-image: url(./a-c-pvuW7jPTz3E-unsplash.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .form-container {
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 95%;
+            background: transparent;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid white;
+            font-size: 16px;
+            box-sizing: border-box;
+            background: transparent;
+            color: white;
+            height: 50px;
+        }
+
+        .form-group input::placeholder {
+            color: white;
+            background-color: transparent;
+            padding: 0 5px;
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 12px;
+            top: 17px;
+            padding: 0 5px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            pointer-events: none;
+            transition: all 0.2s ease-out;
+            background: transparent;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group select:focus + label,
+        .form-group select:valid + label {
+            top: -17px;
+            left: 8px;
+            font-size: 12px;
+            color: white;
+        }
+
+        .form-group select option {
+            color: black;
+            background-color: white;
+        }
+.hidden{
+    display: none;
+}
+        button {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            border-radius: 6px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        #copyBtn, #copyAdminEmailBtn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+            }
+
+            .form-group input,
+            .form-group select,
+            button {
+                width: 100%;
+                font-size: 14px;
+                height: 0.5in;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>ডিলার অ্যাপয়েন্টমেন্ট ফর্ম</h2>
+
+    <form id="dealerForm">
+        <div class="form-group">
+            <input type="text" id="name" name="name" placeholder=" " required>
+            <label for="name">নাম</label>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" id="mobile" name="mobile" placeholder=" " pattern="^\d{11}$" required>
+            <label for="mobile">মোবাইল নম্বর</label>
+        </div>
+
+        <div class="form-group">
+            <select id="education" name="education" required>
+                <option value="SSC">এসএসসি</option>
+                <option value="HSC">এইচএসসি</option>
+                <option value="Honors">অনার্স</option>
+                <option value="MA">এমএ</option>
+            </select>
+            <label for="education">শিক্ষাগত যোগ্যতা</label>
+        </div>
+
+        <div class="form-group">
+            <input type="email" id="email" name="email" placeholder=" " required>
+            <label for="email">ইমেইল</label>
+        </div>
+
+        <div class="form-group">
+            <input type="date" id="dob" name="dob" placeholder=" " required>
+            <label for="dob">জন্ম তারিখ</label>
+        </div>
+
+        <div class="form-group hidden">
+            <input type="number" id="age" name="age" placeholder=" " readonly>
+            <label for="age">বয়স</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="currentJob" name="currentJob" placeholder=" " required>
+            <label for="currentJob">বর্তমান চাকরি বা ব্যবসার বর্ণনা</label>
+        </div>
+
+        <div class="form-group">
+            <select id="religion" name="religion" required>
+                <option value="Muslim">মুসলিম</option>
+                <option value="Hindu">হিন্দু</option>
+                <option value="Christian">খ্রিস্টান</option>
+                <option value="Buddhist">বৌদ্ধ</option>
+            </select>
+            <label for="religion">ধর্ম</label>
+        </div>
+
+        <div class="form-group">
+            <select id="sex" name="sex" required>
+                <option value="Male">পুরুষ</option>
+                <option value="Female">মহিলা</option>
+            </select>
+            <label for="sex">লিঙ্গ</label>
+        </div>
+
+        <div class="form-group">
+            <select id="maritalStatus" name="maritalStatus" required>
+                <option value="Single">অবিবাহিত</option>
+                <option value="Married">বিবাহিত</option>
+            </select>
+            <label for="maritalStatus">বৈবাহিক অবস্থা</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="currentAddress" name="currentAddress" placeholder=" " required>
+            <label for="currentAddress">বর্তমান ঠিকানা</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="permanentAddress" name="permanentAddress" placeholder=" " required>
+            <label for="permanentAddress">স্থায়ী ঠিকানা</label>
+        </div>
+
+        <!-- নতুন Input Field -->
+        <div class="form-group">
+            <input type="text" id="areaInfo" name="areaInfo" placeholder=" " required>
+            <label for="areaInfo">বিভাগ, জেলা ও উপজেলা লিখুন</label>
+        </div>
+
+        <button type="submit">ফর্ম জমা দিন</button>
+    </form>
+
+    <button id="copyBtn">তথ্য কপি করুন</button>
+    <button id="copyAdminEmailBtn">এডমিন ইমেইল কপি করুন</button>
+</div>
+
+<script>
+    const submittedData = [];
+
+    document.getElementById('dealerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const dob = document.getElementById('dob').value;
+        const birthDate = new Date(dob);
+        const age = new Date().getFullYear() - birthDate.getFullYear();
+
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            mobile: document.getElementById('mobile').value,
+            education: document.getElementById('education').value,
+            dob: dob,
+            age: age,
+            currentJob: document.getElementById('currentJob').value,
+            religion: document.getElementById('religion').value,
+            sex: document.getElementById('sex').value,
+            maritalStatus: document.getElementById('maritalStatus').value,
+            currentAddress: document.getElementById('currentAddress').value,
+            permanentAddress: document.getElementById('permanentAddress').value,
+            areaInfo: document.getElementById('areaInfo').value
+        };
+
+        submittedData.push(formData);
+        console.log("Submitted Data:", submittedData);
+
+        document.getElementById('copyBtn').style.display = 'block';
+        document.getElementById('copyAdminEmailBtn').style.display = 'block';
+
+        alert('✅ আপনার তথ্য সেভ হয়েছে। এখন "তথ্য কপি করুন" বাটনে ক্লিক করুন ও অ্যাডমিনকে পাঠান এবং এই তথ্য mdsolayman7814@gmail.com - এ পাঠান।');
+
+        document.getElementById('dealerForm').reset();
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', function() {
+        if (submittedData.length === 0) {
+            alert("প্রথমে তথ্য প্রদান করুন!");
+            return;
+        }
+
+        const lastData = submittedData[submittedData.length - 1];
+
+        const textToCopy = `নাম: ${lastData.name}
+ইমেইল: ${lastData.email}
+মোবাইল: ${lastData.mobile}
+শিক্ষাগত যোগ্যতা: ${lastData.education}
+জন্ম তারিখ: ${lastData.dob}
+বয়স: ${lastData.age}
+বর্তমান চাকরি বা ব্যবসা: ${lastData.currentJob}
+ধর্ম: ${lastData.religion}
+লিঙ্গ: ${lastData.sex}
+বৈবাহিক অবস্থা: ${lastData.maritalStatus}
+বর্তমান ঠিকানা: ${lastData.currentAddress}
+স্থায়ী ঠিকানা: ${lastData.permanentAddress}
+বিভাগ/জেলা/উপজেলা: ${lastData.areaInfo}`;
+
+        navigator.clipboard.writeText(textToCopy).then(function() {
+            alert('✅ ডেটা কপি হয়েছে।');
+        }, function(err) {
+            console.error('Error copying text: ', err);
+        });
+    });
+</script>
+
+</body>
+</html>
