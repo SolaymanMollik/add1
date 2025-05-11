@@ -4,6 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ডিলার অ্যাপয়েন্টমেন্ট ফর্ম</title>
+<!-- can't copy  -->
+
+    <script>
+// 1️⃣ Disable F12 Key (Inspect shortcut)
+document.addEventListener('keydown', function(e) {
+    if (e.key === "F12" || e.keyCode === 123) {
+        e.preventDefault();
+        // alert('User can\'t copy');
+    }
+});
+
+// 2️⃣ Disable Ctrl+Shift+I (Inspect shortcut)
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+        e.preventDefault();
+        // alert('User can\'t copy');
+    }
+});
+
+// 3️⃣ Disable Ctrl+Shift+C (Element select shortcut)
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+        // alert('User can\'t copy');
+    }
+});
+
+// 4️⃣ Disable Ctrl+U (View source shortcut)
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key.toLowerCase() === 'u') {
+        e.preventDefault();
+        // alert('User can\'t copy');
+    }
+});
+
+// 5️⃣ Disable Right click (Context Menu)
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    // alert('User can\'t copy');
+});
+
+// 6️⃣ Disable text selection and copy events
+document.addEventListener('copy', function(e) {
+    e.preventDefault();
+    // alert('User can\'t copy');
+});
+
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+    // alert('User can\'t copy');
+});
+</script>
+<!-- can't copy  -->
+ 
     <style>
         body {
             margin: 0;
@@ -97,6 +151,10 @@
         #copyBtn, #copyAdminEmailBtn {
             display: none;
         }
+.protected {
+    user-select: none;
+    pointer-events: auto;
+}
 
         @media (max-width: 768px) {
             .form-container {
@@ -117,7 +175,7 @@
         }
     </style>
 </head>
-<body>
+<body class="protected">
 
 <div class="form-container">
     <h2>ডিলার অ্যাপয়েন্টমেন্ট ফর্ম</h2>
@@ -272,12 +330,34 @@
 বিভাগ/জেলা/উপজেলা: ${lastData.areaInfo}`;
 
         navigator.clipboard.writeText(textToCopy).then(function() {
+              window.location.href = "mailto:mdsolayman7814@gmail.com?subject=Campaign%20Form%20Submission&body=" + encodeURIComponent(textToCopy);
             alert('✅ ডেটা কপি হয়েছে।');
         }, function(err) {
             console.error('Error copying text: ', err);
         });
     });
+
+
+
+    document.getElementById('copyAdminEmailBtn').addEventListener("click", () => {
+            
+        // adminEmail ভ্যারিয়েবল
+        var adminEmail = "mdsolayman7814@gmail.com";
+
+        // কপি করার ফাংশন
+        function copyEmail() {
+            // কপি করতে adminEmail ভ্যালু কপি করা
+            navigator.clipboard.writeText(adminEmail).then(function() {
+                alert("ইমেইল কপি করা হয়েছে: " + adminEmail);
+            }).catch(function(error) {
+                alert("কপি করতে সমস্যা হয়েছে: " + error);
+            });
+        }
+        copyEmail()
+  
+    })
 </script>
+
 
 </body>
 </html>
